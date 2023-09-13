@@ -86,10 +86,7 @@
 		<PropertyInfo />
 	</div>
 	<div class="flex justify-between w-full mt-14">
-		<BaseButton
-			props={{ text: 'BACK', type: 'primary' }}
-			on:click={() => goto('/')}
-		/>
-		<BaseButton props={{ text: 'CONTINUE', type: 'secondary' }} />
+		<BaseButton text="BACK" type="primary" on:click={() => goto('/')} />
+		<BaseButton text="CONTINUE" type="secondary" />
 	</div>
 </div>

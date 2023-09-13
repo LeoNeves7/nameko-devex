@@ -11,11 +11,12 @@
 <div class="flex flex-col">
 	<h1
 		class="text-primary text-xxl drop-shadow-primary font-extrabold leading-9 mb-6"
+		data-testid="order-details-title"
 	>
 		Order
 	</h1>
 	{#each data.order_details as { quantity, price, image, product } (data.id)}
-		<div class="flex flex-col gap-4">
+		<div class="flex flex-col gap-4" data-testid="orders-wrapper">
 			<div
 				class="flex items-center border-b border-t border-white-secondary py-2 justify-between"
 			>
@@ -59,9 +60,6 @@
 		<p>There is no data</p>
 	{/each}
 	<div class="mt-14">
-		<BaseButton
-			props={{ text: 'BACK', type: 'primary' }}
-			on:click={() => goto('/')}
-		/>
+		<BaseButton text="BACK" type="primary" on:click={() => goto('/')} />
 	</div>
 </div>
