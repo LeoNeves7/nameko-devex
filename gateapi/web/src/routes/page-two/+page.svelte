@@ -57,7 +57,7 @@
 			</div>
 		</div>
 	{:else}
-		<p>There is no data</p>
+		<p>There is no data.</p>
 	{/each}
 	<div class="mt-14">
 		<BaseButton text="BACK" type="primary" on:click={() => goto('/')} />
