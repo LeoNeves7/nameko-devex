@@ -28,6 +28,7 @@
 
 <div
 	class="flex flex-1 relative flex-col md:max-w-md gap-2"
+	data-testid="base-select"
 	on:click={toggleShowDropdown}
 	on:keydown={toggleShowDropdown}
 >
@@ -50,6 +51,7 @@
 	{#if showDropdown}
 		<div
 			transition:slide
+			data-testid="base-select-dropdown"
 			class="absolute z-30 top-full border-[1px] border-solid border-secondary rounded w-full mt-2 p-4 bg-white max-h-48"
 		>
 			{#each options as option (option.id)}

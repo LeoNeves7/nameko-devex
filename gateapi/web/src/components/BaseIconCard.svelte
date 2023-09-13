@@ -5,6 +5,7 @@
 
 <button
 	class="flex flex-1 items-center justify-center gap-2 border-[1px] h-[72px] lg:max-w-[195px] w-full border-solid rounded-[4px] transition-colors duration-300 hover:text-purple hover:border-purple hover:bg-light-purple text-primary border-secondary"
+	data-testid="base-icon-card"
 	class:card-active={selected}
 	on:click
 >

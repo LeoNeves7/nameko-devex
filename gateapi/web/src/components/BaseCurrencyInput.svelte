@@ -2,7 +2,7 @@
 	import CurrencyIcon from './icons/CurrencyIcon.svelte'
 
 	export let id: string
-	export let value: GLfloat
+	export let value: number
 	export let label: string
 
 	let inputRef: HTMLInputElement
@@ -10,6 +10,7 @@
 
 <div
 	class="flex md:flex-1 flex-col md:max-w-md gap-2"
+	data-testid="base-currency"
 	on:click={() => inputRef.focus()}
 	on:keyup={() => inputRef.focus()}
 >

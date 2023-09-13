@@ -14,7 +14,10 @@
 	}
 </script>
 
-<div class="flex flex-1 flex-col md:max-w-md gap-2">
+<div
+	class="flex flex-1 flex-col md:max-w-md gap-2"
+	data-testid="base-text-input"
+>
 	<label for={id} class="text-primary text-s leading-4">
 		{label}
 	</label>
