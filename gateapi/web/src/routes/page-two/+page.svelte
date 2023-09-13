@@ -5,6 +5,13 @@
 
 	import type { IOrder } from '../../interfaces/order'
 
+	const formatPrice = (price: number) => {
+		return new Intl.NumberFormat('en-US', {
+			style: 'currency',
+			currency: 'USD',
+		}).format(price)
+	}
+
 	export let data: IOrder
 </script>
 
@@ -22,7 +29,7 @@
 			>
 				<div class="flex flex-col gap-2">
 					<p class="text-primary">Quantity: {quantity}</p>
-					<p class="text-primary">Price: {price}</p>
+					<p class="text-primary">Price: {formatPrice(price)}</p>
 				</div>
 				<img
 					class="rounded-full border-solid border-[1px] border-white-secondary bg-white h-16 w-16"
