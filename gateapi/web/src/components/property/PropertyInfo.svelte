@@ -6,6 +6,7 @@
 	import BedIcon from '../icons/BedIcon.svelte'
 	import BathIcon from '../icons/BathIcon.svelte'
 	import PeopleIcon from '../icons/PeopleIcon.svelte'
+	import CalendarIcon from '../icons/CalendarIcon.svelte'
 
 	let unitName: string = ''
 	let selectedDate: string = ''
@@ -46,6 +47,8 @@
 		<BaseTextInput
 			id="available"
 			label="Available on"
+			placeholder="mm/dd/yyyy"
+			icon={CalendarIcon}
 			bind:value={selectedDate}
 		/>
 		<BaseSelect id="vacancy" label="Vacancy" icon={PeopleIcon} options={[]} />
