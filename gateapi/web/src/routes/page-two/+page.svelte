@@ -37,7 +37,7 @@
 					alt=""
 				/>
 			</div>
-			<h2 class="text-primary text-s">Ship details</h2>
+			<h3 class="text-primary text-s">Ship details</h3>
 			<div
 				class="flex flex-col md:grid grid-cols-3 gap-6 bg-white border-solid border-[1px] p-4 border-white-secondary rounded shadow-primary-shadow"
 			>
