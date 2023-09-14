@@ -24,15 +24,50 @@ div,
 ul,
 li,
 ol {
-	font-family: 'Inter';
-	font-weight: 600;
+	font-family: 'Amplitude Wide Regular';
 	font-style: normal;
 	letter-spacing: -0.02em;
+}
+
+h2,
+input,
+p {
+	font-family: 'Amplitude Wide Book';
+}
+
+label,
+h3 {
+	font-family: 'Amplitude Wide Medium';
+}
+
+button {
+	font-family: 'Inter';
 }
 
 @layer utilities {
 	.input-hover:hover,
 	.input-hover:focus {
 		@apply border-accent placeholder:text-accent;
+	}
+}
+
+@layer base {
+	@font-face {
+		font-family: 'Amplitude Wide Regular';
+		src: local('amplitude wide'), local('amplitude-wide'),
+			url('/fonts/amplitude-wide/amplitudewide-regular.woff');
+		font-weight: normal;
+	}
+
+	@font-face {
+		font-family: 'Amplitude Wide Medium';
+		src: local('amplitude wide medium'), local('amplitude-wide-medium'),
+			url('/fonts/amplitude-wide/amplitudewide-medium.woff');
+	}
+
+	@font-face {
+		font-family: 'Amplitude Wide Book';
+		src: local('amplitude wide book'), local('amplitude-wide-book'),
+			url('/fonts/amplitude-wide/amplitudewide-book.woff');
 	}
 }
