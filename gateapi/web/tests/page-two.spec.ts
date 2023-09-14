@@ -1,25 +1,31 @@
 import { expect, test } from '@playwright/test'
 
-test('page two components must be defined', async ({ page }) => {
-	await page.goto('/page-two')
+test.describe('page two', () => {
+	test.beforeEach(async ({ page }) => {
+		await page.goto('/page-two')
+	})
 
-	expect(page.getByTestId('order-details-title')).toBeDefined()
+	test('page two components must be defined', async ({ page }) => {
+		await page.goto('/page-two')
 
-	expect(page.getByTestId('orders-wrapper')).toBeDefined()
+		expect(page.getByTestId('order-details-title')).toBeVisible()
 
-	expect(page.getByText('BACK')).toBeDefined()
-})
+		expect(page.getByTestId('orders-wrapper')).toBeDefined()
 
-test('back button should redirect to home page', async ({ page }) => {
-	await page.goto('/page-two')
+		expect(page.getByText('BACK')).toBeDefined()
+	})
 
-	const backButton = page.getByText('BACK')
-	expect(backButton).toBeDefined()
+	test('back button should redirect to home page', async ({ page }) => {
+		await page.goto('/page-two')
 
-	await backButton.click()
+		const backButton = page.getByText('BACK')
+		expect(backButton).toBeDefined()
 
-	await page.waitForURL('/')
+		await backButton.click()
 
-	const currentURL = page.url()
-	expect(currentURL).toBe('http://localhost:3000/')
+		await page.waitForURL('/')
+
+		const currentURL = page.url()
+		expect(currentURL).toBe('http://localhost:3000/')
+	})
 })
