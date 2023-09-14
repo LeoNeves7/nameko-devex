@@ -27,7 +27,7 @@ test.describe('home', () => {
 		expect(currentURL).toBe('http://localhost:3000/property-details')
 	})
 
-	test('page two link click must redirect to property details page', async ({
+	test('page two link click must redirect to page two page', async ({
 		page,
 	}) => {
 		const pageTwoLink = page.getByText('PageTwo')
