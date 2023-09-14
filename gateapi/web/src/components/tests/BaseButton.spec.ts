@@ -11,13 +11,19 @@ describe('BaseButton', () => {
 	interface MakeSutProps {
 		text: string
 		type: 'primary' | 'secondary'
+		isDisabled?: boolean
 	}
 
-	const makeSut = ({ text = '', type = 'primary' }: MakeSutProps): SutTypes => {
+	const makeSut = ({
+		text = '',
+		type = 'primary',
+		isDisabled = false,
+	}: MakeSutProps): SutTypes => {
 		const sut = render(BaseButton, {
 			props: {
 				text,
 				type,
+				isDisabled,
 			},
 		})
 
@@ -39,5 +45,17 @@ describe('BaseButton', () => {
 		const text = getByText(anyText)
 
 		expect(text).toBeDefined()
+	})
+
+	it('should be disabled', () => {
+		const { sut } = makeSut({
+			text: 'Any text',
+			type: 'primary',
+			isDisabled: true,
+		})
+		const { getByTestId } = sut
+		const button = getByTestId('base-button').disabled
+
+		expect(button).toBe(true)
 	})
 })

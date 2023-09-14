@@ -4,6 +4,6 @@
 	export let text: string = ''
 </script>
 
-<p transition:fade class="text-xxxs text-red">
+<p transition:fade data-testid="base-error-message" class="text-xxxs text-red">
 	{text}
 </p>
