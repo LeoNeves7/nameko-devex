@@ -35,9 +35,9 @@ describe('BaseIconCard', () => {
 	it('should have the text defined', () => {
 		const { sut } = makeSut({ text: 'Any text', selected: false })
 		const { getByTestId } = sut
-		const h2 = getByTestId('base-icon-card').querySelector('h2')
+		const h3 = getByTestId('base-icon-card').querySelector('h3')
 
-		expect(h2.textContent).toBe('Any text')
+		expect(h3.textContent).toBe('Any text')
 	})
 
 	it('should render HTML content in the slot', () => {

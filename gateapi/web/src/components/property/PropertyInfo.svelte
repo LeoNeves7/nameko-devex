@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { IOptions } from '../../interfaces/select'
+
 	import BaseCurrencyInput from '../BaseCurrencyInput.svelte'
 	import BaseTextInput from '../BaseTextInput.svelte'
 	import BaseSelect from '../BaseSelect.svelte'
@@ -8,12 +10,32 @@
 	import PeopleIcon from '../icons/PeopleIcon.svelte'
 	import CalendarIcon from '../icons/CalendarIcon.svelte'
 
-	let unitName: string = ''
-	let selectedDate: string = ''
-	let lease: number = 0
-	let sqft: number = 0
-	let rent: number = 0
-	let deposit: number = 0
+	export let clearValues: boolean = false
+	export let unitName: string = ''
+	export let selectedDate: string = ''
+	export let selectedBed: IOptions = { name: '' }
+	export let selectedBath: IOptions = { name: '' }
+	export let selectedVacancy: IOptions = { name: '' }
+	export let lease: number = 0
+	export let sqft: number = 0
+	export let rent: number = 0
+	export let deposit: number = 0
+
+	const handleClearValues = () => {
+		unitName = ''
+		selectedDate = ''
+		selectedBed = { name: '' }
+		selectedBath = { name: '' }
+		selectedVacancy = { name: '' }
+		lease = 0
+		sqft = 0
+		rent = 0
+		deposit = 0
+
+		clearValues = false
+	}
+
+	$: clearValues ? handleClearValues() : null
 </script>
 
 <div
@@ -36,8 +58,27 @@
 		/>
 	</div>
 	<div class="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full">
-		<BaseSelect id="beds" label="Beds" icon={BedIcon} options={[]} />
-		<BaseSelect id="baths" label="Baths" icon={BathIcon} options={[]} />
+		<BaseSelect
+			id="beds"
+			label="Beds"
+			icon={BedIcon}
+			bind:selectedOption={selectedBed}
+			options={[
+				{ id: 1, name: 'One bed' },
+				{ id: 2, name: 'Two beds' },
+				{ id: 3, name: 'Three beds' },
+			]}
+		/>
+		<BaseSelect
+			id="baths"
+			label="Baths"
+			icon={BathIcon}
+			bind:selectedOption={selectedBath}
+			options={[
+				{ id: 1, name: 'One bath' },
+				{ id: 2, name: 'Two baths' },
+			]}
+		/>
 		<BaseTextInput
 			id="sq"
 			inputType="number"
@@ -51,6 +92,15 @@
 			icon={CalendarIcon}
 			bind:value={selectedDate}
 		/>
-		<BaseSelect id="vacancy" label="Vacancy" icon={PeopleIcon} options={[]} />
+		<BaseSelect
+			id="vacancy"
+			label="Vacancy"
+			icon={PeopleIcon}
+			bind:selectedOption={selectedVacancy}
+			options={[
+				{ id: 1, name: '1 - 3 ' },
+				{ id: 2, name: '4 - 5' },
+			]}
+		/>
 	</div>
 </div>

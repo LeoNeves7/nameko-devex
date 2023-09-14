@@ -10,7 +10,7 @@
 	on:click
 >
 	<slot />
-	<h2>{text}</h2>
+	<h3>{text}</h3>
 </button>
 
 <style lang="scss">

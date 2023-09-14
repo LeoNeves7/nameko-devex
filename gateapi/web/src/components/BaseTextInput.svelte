@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { validateValue } from '../utils/validation'
+	import BaseErrorMessage from './BaseErrorMessage.svelte'
+
 	type InputType = 'text' | 'number'
 
 	export let id: string
@@ -9,11 +12,20 @@
 	export let readOnly: boolean = false
 	export let icon: ConstructorOfATypedSvelteComponent = null
 
+	let inputIsValid: boolean = true
+	let errorMessage: string = ''
+
 	$: icon ? (inputType = 'text') : (inputType = inputType)
 
 	const inputClasses = (): string => {
 		return `input-hover h-12 bg-white border-[1px] border-solid border-secondary 
-            transition-colors duration-300 font-normal text-primary p-4 rounded-[4px] placeholder:text-secondary`
+            transition-colors duration-300 text-primary p-4 rounded-[4px] placeholder:text-secondary`
+	}
+
+	const handleInputError = (value) => {
+		const error = validateValue(value)
+		inputIsValid = error.valid
+		errorMessage = error.message
 	}
 </script>
 
@@ -32,7 +44,18 @@
 		</div>
 	{/if}
 	{#if inputType === 'number' && !icon}
-		<input type="number" {id} bind:value {placeholder} class={inputClasses()} />
+		<input
+			type="number"
+			{id}
+			bind:value
+			{placeholder}
+			class={inputClasses()}
+			class:border-red={!inputIsValid}
+			on:blur={() => handleInputError(value)}
+		/>
+		{#if !inputIsValid}
+			<BaseErrorMessage text={errorMessage} />
+		{/if}
 	{:else}
 		<input
 			type="text"
@@ -41,7 +64,12 @@
 			{placeholder}
 			class={inputClasses()}
 			class:pl-12={icon}
+			class:border-red={!inputIsValid}
 			disabled={readOnly}
+			on:blur={() => handleInputError(value)}
 		/>
+		{#if !inputIsValid}
+			<BaseErrorMessage text={errorMessage} />
+		{/if}
 	{/if}
 </div>
