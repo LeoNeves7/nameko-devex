@@ -1,20 +1,34 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 
-	import type { IPropertyType } from 'src/interfaces/properties'
+	import type { IPropertyType } from '../../interfaces/properties'
+	import type { IOptions } from '../../interfaces/select'
 
 	import BaseTextInput from '../../components/BaseTextInput.svelte'
 	import BaseButton from '../../components/BaseButton.svelte'
 	import BaseIconCard from '../../components/BaseIconCard.svelte'
+	import BaseToast from '../../components/BaseToast.svelte'
 	import PropertyInfo from '../../components/property/PropertyInfo.svelte'
 	import BuildingIcon from '../../components/icons/BuildingIcon.svelte'
 	import HouseIcon from '../../components/icons/HouseIcon.svelte'
 
 	import propertyImage from '$lib/assets/property-details-image.svg'
 
+	let resetValues: boolean = false
+	let showToast: boolean = false
+
 	let propertyName: string = ''
 	let propertySelected: IPropertyType = <IPropertyType>{}
 	let address: string = ''
+	let unitName: string = ''
+	let selectedDate: string = ''
+	let selectedBed: IOptions = { name: '' }
+	let selectedBath: IOptions = { name: '' }
+	let selectedVacancy: IOptions = { name: '' }
+	let lease: number = 0
+	let sqft: number = 0
+	let rent: number = 0
+	let deposit: number = 0
 
 	const propertyTypes: IPropertyType[] = [
 		{ name: 'Single-Family', icon: HouseIcon, id: 1 },
@@ -33,6 +47,33 @@
 			(property) => property.id === propertyId
 		)
 	}
+
+	const handleSendToast = () => {
+		showToast = true
+		handleResetValues()
+	}
+
+	const handleResetValues = () => {
+		resetValues = true
+		propertyName = ''
+		address = ''
+		propertySelected = <IPropertyType>{}
+	}
+
+	$: showToast ? setTimeout(() => (showToast = false), 3000) : null
+	$: isValid =
+		propertyName &&
+		propertySelected.id &&
+		address &&
+		unitName &&
+		selectedDate &&
+		selectedBed.id &&
+		selectedBath.id &&
+		selectedVacancy.id &&
+		lease > 0 &&
+		sqft > 0 &&
+		rent > 0 &&
+		deposit > 0
 </script>
 
 <div class="flex flex-col items-center">
@@ -66,7 +107,7 @@
 		</div>
 	</div>
 	<div class="flex flex-col w-full mb-6" data-testid="property-type-section">
-		<h2 class="mb-4 text-primary">Property type</h2>
+		<h3 class="mb-4 text-primary">Property type</h3>
 		<div
 			class="grid grid-cols-2 justify-items-center lg:flex gap-4 lg:justify-between"
 		>
@@ -82,11 +123,31 @@
 		</div>
 	</div>
 	<div class="flex flex-col w-full" data-testid="unit-info-section">
-		<h2 class="mb-4 text-primary">Unit info</h2>
-		<PropertyInfo />
+		<h3 class="mb-4 text-primary">Unit info</h3>
+		<PropertyInfo
+			bind:clearValues={resetValues}
+			bind:unitName
+			bind:selectedDate
+			bind:selectedBed
+			bind:selectedBath
+			bind:selectedVacancy
+			bind:lease
+			bind:sqft
+			bind:rent
+			bind:deposit
+		/>
 	</div>
 	<div class="flex justify-between w-full mt-14">
 		<BaseButton text="BACK" type="primary" on:click={() => goto('/')} />
-		<BaseButton text="CONTINUE" type="secondary" />
+		<BaseButton
+			text="CONTINUE"
+			type="secondary"
+			isDisabled={!isValid}
+			on:click={handleSendToast}
+		/>
 	</div>
 </div>
+
+{#if showToast}
+	<BaseToast message={'Form sent successfully!'} />
+{/if}
