@@ -12,6 +12,7 @@ module.exports = {
 			grey: '#474374',
 			white: '#FFFFFF',
 			'white-secondary': '#E5E5E4',
+			red: '#FF0000',
 		},
 		fontFamily: {
 			inter: ['Inter'],
@@ -22,6 +23,7 @@ module.exports = {
 			s: '1rem',
 			xs: '0.938rem',
 			xxs: '0.875rem',
+			xxxs: '0.75rem',
 		},
 		dropShadow: {
 			primary: '0px 4px 4px rgba(0, 0, 0, 0.25)',
