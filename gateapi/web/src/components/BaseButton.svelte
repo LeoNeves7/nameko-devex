@@ -3,6 +3,7 @@
 
 	export let type: ButtonType = 'primary'
 	export let text: string
+	export let isDisabled: boolean = false
 
 	const buttonClasses = (): string => {
 		const baseClass =
@@ -14,6 +15,18 @@
 	}
 </script>
 
-<button class={buttonClasses()} on:click data-testid="base-button">
+<button
+	class={buttonClasses()}
+	class:btn-disabled={isDisabled}
+	disabled={isDisabled}
+	on:click
+	data-testid="base-button"
+>
 	{text}
 </button>
+
+<style lang="scss">
+	.btn-disabled {
+		@apply opacity-40 cursor-not-allowed;
+	}
+</style>
